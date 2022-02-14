@@ -3,21 +3,11 @@
 # otool -l mach_kernel 
 # size -m mach_kernel
 #
-#
-# get OS type from shell
-OSTYPE	= $(shell uname)
-#
 ARCH	= i386
 
 # if Linxu, use the darwin-cross tools to compile/link
-ifeq ($(OSTYPE),Linux)
-  CC  := /opt/darwin-cross/bin/i386-apple-darwin8-gcc-4.0
-  LD  := /opt/darwin-cross/bin/i386-apple-darwin8-ld
-else
-  CC  := /usr/bin/gcc-4.0
-  LD  := /usr/bin/ld
-	LDFLAGS = -classic_linker
-endif
+CC := docker run -v $(shell pwd):/app --workdir=/app --rm darwin8-binutils:latest i386-apple-darwin8-gcc-4.0
+LD := docker run -v $(shell pwd):/app --workdir=/app --rm darwin8-binutils:latest i386-apple-darwin8-ld
 
 # start.o must be 1st in the link order (ld below)
 OBJ	= start.o vsprintf.o console.o utils.o elilo_code.o darwin_code.o linux_code.o boot_loader.o
