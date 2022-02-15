@@ -6,6 +6,8 @@ cd "${SCRIPT_DIR}"
 VERSION="2.6.39"
 CONFIG="linux-${VERSION}.config"
 
+docker build . -t atv-kernel-builder
+
 if [ ! -f linux-${VERSION}.tar.bz2 ] ; then
 	wget http://www.kernel.org/pub/linux/kernel/v2.6/linux-${VERSION}.tar.bz2
 fi
@@ -20,8 +22,9 @@ else
 fi
 #
 cd  linux-${VERSION}
-make oldconfig
-make
+patch -p1 < ../atv-kernel.patch
+docker run --rm -it -v $(pwd):/build atv-kernel-builder make oldconfig
+docker run --rm -it -v $(pwd):/build atv-kernel-builder make -j$(nproc --all)
 
 #
 cd "${SCRIPT_DIR}"
