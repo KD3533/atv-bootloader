@@ -1,17 +1,16 @@
-#!/bin/bash
+#!/bin/bash -x
 
 SCRIPT_DIR=$(dirname `readlink -f "$0"`)
 cd "${SCRIPT_DIR}"
 
-VERSION="2.6.39"
+VERSION="5.15.41"
 CONFIG="linux-${VERSION}.config"
 
-if [ ! -f linux-${VERSION}.tar.bz2 ] ; then
-	wget http://www.kernel.org/pub/linux/kernel/v2.6/linux-${VERSION}.tar.bz2
+if [ ! -f linux-${VERSION}.tar.xz ] ; then
+	wget http://www.kernel.org/pub/linux/kernel/v5.x/linux-${VERSION}.tar.xz
 fi
-#
-#
-tar -jxf linux-${VERSION}.tar.bz2
+
+tar -xvf linux-${VERSION}.tar.xz
 
 if [ -f "${CONFIG}" ] ; then
 	cp "${CONFIG}"  linux-${VERSION}/.config
@@ -20,7 +19,7 @@ else
 fi
 #
 cd  linux-${VERSION}
-make oldconfig
+make olddefconfig && make prepare
 make
 
 #

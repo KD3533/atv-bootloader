@@ -1,0 +1,68 @@
+kernel/arch/x86/crypto/twofish-i586.ko: kernel/crypto/twofish_common.ko
+kernel/fs/quota/quota_v1.ko:
+kernel/fs/quota/quota_v2.ko: kernel/fs/quota/quota_tree.ko
+kernel/fs/quota/quota_tree.ko:
+kernel/fs/binfmt_misc.ko:
+kernel/fs/autofs/autofs4.ko:
+kernel/fs/efivarfs/efivarfs.ko:
+kernel/crypto/xcbc.ko:
+kernel/crypto/wp512.ko:
+kernel/crypto/pcbc.ko:
+kernel/crypto/lrw.ko:
+kernel/crypto/blowfish_generic.ko: kernel/crypto/blowfish_common.ko
+kernel/crypto/blowfish_common.ko:
+kernel/crypto/twofish_generic.ko: kernel/crypto/twofish_common.ko
+kernel/crypto/twofish_common.ko:
+kernel/crypto/serpent_generic.ko:
+kernel/crypto/cast_common.ko:
+kernel/crypto/cast5_generic.ko: kernel/crypto/cast_common.ko
+kernel/crypto/cast6_generic.ko: kernel/crypto/cast_common.ko
+kernel/crypto/deflate.ko:
+kernel/crypto/michael_mic.ko:
+kernel/crypto/ansi_cprng.ko:
+kernel/crypto/tcrypt.ko:
+kernel/drivers/acpi/processor.ko:
+kernel/drivers/acpi/thermal.ko:
+kernel/drivers/net/tun.ko:
+kernel/drivers/thermal/intel/x86_pkg_temp_thermal.ko:
+kernel/drivers/cpufreq/acpi-cpufreq.ko: kernel/drivers/acpi/processor.ko
+kernel/drivers/cpufreq/speedstep-ich.ko: kernel/drivers/cpufreq/speedstep-lib.ko
+kernel/drivers/cpufreq/speedstep-lib.ko:
+kernel/drivers/cpufreq/speedstep-smi.ko: kernel/drivers/cpufreq/speedstep-lib.ko
+kernel/drivers/cpufreq/speedstep-centrino.ko:
+kernel/drivers/cpufreq/p4-clockmod.ko: kernel/drivers/cpufreq/speedstep-lib.ko
+kernel/drivers/leds/trigger/ledtrig-audio.ko:
+kernel/drivers/crypto/geode-aes.ko:
+kernel/drivers/crypto/padlock-aes.ko:
+kernel/drivers/crypto/padlock-sha.ko:
+kernel/sound/soundcore.ko:
+kernel/sound/core/oss/snd-mixer-oss.ko: kernel/sound/core/snd.ko kernel/sound/soundcore.ko
+kernel/sound/core/oss/snd-pcm-oss.ko: kernel/sound/core/oss/snd-mixer-oss.ko kernel/sound/core/snd-pcm.ko kernel/sound/core/snd-timer.ko kernel/sound/core/snd.ko kernel/sound/soundcore.ko
+kernel/sound/core/snd.ko: kernel/sound/soundcore.ko
+kernel/sound/core/snd-ctl-led.ko: kernel/drivers/leds/trigger/ledtrig-audio.ko kernel/sound/core/snd.ko kernel/sound/soundcore.ko
+kernel/sound/core/snd-timer.ko: kernel/sound/core/snd.ko kernel/sound/soundcore.ko
+kernel/sound/core/snd-pcm.ko: kernel/sound/core/snd-timer.ko kernel/sound/core/snd.ko kernel/sound/soundcore.ko
+kernel/sound/pci/hda/snd-hda-codec.ko: kernel/sound/hda/snd-hda-core.ko kernel/sound/core/snd-pcm.ko kernel/sound/core/snd-timer.ko kernel/sound/core/snd.ko kernel/sound/soundcore.ko
+kernel/sound/pci/hda/snd-hda-codec-generic.ko: kernel/sound/pci/hda/snd-hda-codec.ko kernel/sound/hda/snd-hda-core.ko kernel/drivers/leds/trigger/ledtrig-audio.ko kernel/sound/core/snd-pcm.ko kernel/sound/core/snd-timer.ko kernel/sound/core/snd.ko kernel/sound/soundcore.ko
+kernel/sound/pci/hda/snd-hda-codec-realtek.ko: kernel/sound/pci/hda/snd-hda-codec-generic.ko kernel/sound/pci/hda/snd-hda-codec.ko kernel/sound/hda/snd-hda-core.ko kernel/drivers/leds/trigger/ledtrig-audio.ko kernel/sound/core/snd-pcm.ko kernel/sound/core/snd-timer.ko kernel/sound/core/snd.ko kernel/sound/soundcore.ko
+kernel/sound/pci/hda/snd-hda-codec-cmedia.ko: kernel/sound/pci/hda/snd-hda-codec-generic.ko kernel/sound/pci/hda/snd-hda-codec.ko kernel/sound/hda/snd-hda-core.ko kernel/drivers/leds/trigger/ledtrig-audio.ko kernel/sound/core/snd-pcm.ko kernel/sound/core/snd-timer.ko kernel/sound/core/snd.ko kernel/sound/soundcore.ko
+kernel/sound/pci/hda/snd-hda-codec-analog.ko: kernel/sound/pci/hda/snd-hda-codec-generic.ko kernel/sound/pci/hda/snd-hda-codec.ko kernel/sound/hda/snd-hda-core.ko kernel/drivers/leds/trigger/ledtrig-audio.ko kernel/sound/core/snd-pcm.ko kernel/sound/core/snd-timer.ko kernel/sound/core/snd.ko kernel/sound/soundcore.ko
+kernel/sound/pci/hda/snd-hda-codec-idt.ko: kernel/sound/pci/hda/snd-hda-codec-generic.ko kernel/sound/pci/hda/snd-hda-codec.ko kernel/sound/hda/snd-hda-core.ko kernel/drivers/leds/trigger/ledtrig-audio.ko kernel/sound/core/snd-pcm.ko kernel/sound/core/snd-timer.ko kernel/sound/core/snd.ko kernel/sound/soundcore.ko
+kernel/sound/pci/hda/snd-hda-codec-si3054.ko: kernel/sound/pci/hda/snd-hda-codec.ko kernel/sound/hda/snd-hda-core.ko kernel/sound/core/snd-pcm.ko kernel/sound/core/snd-timer.ko kernel/sound/core/snd.ko kernel/sound/soundcore.ko
+kernel/sound/pci/hda/snd-hda-codec-cirrus.ko: kernel/sound/pci/hda/snd-hda-codec-generic.ko kernel/sound/pci/hda/snd-hda-codec.ko kernel/sound/hda/snd-hda-core.ko kernel/drivers/leds/trigger/ledtrig-audio.ko kernel/sound/core/snd-pcm.ko kernel/sound/core/snd-timer.ko kernel/sound/core/snd.ko kernel/sound/soundcore.ko
+kernel/sound/pci/hda/snd-hda-codec-ca0110.ko: kernel/sound/pci/hda/snd-hda-codec-generic.ko kernel/sound/pci/hda/snd-hda-codec.ko kernel/sound/hda/snd-hda-core.ko kernel/drivers/leds/trigger/ledtrig-audio.ko kernel/sound/core/snd-pcm.ko kernel/sound/core/snd-timer.ko kernel/sound/core/snd.ko kernel/sound/soundcore.ko
+kernel/sound/pci/hda/snd-hda-codec-conexant.ko: kernel/sound/pci/hda/snd-hda-codec-generic.ko kernel/sound/pci/hda/snd-hda-codec.ko kernel/sound/hda/snd-hda-core.ko kernel/drivers/leds/trigger/ledtrig-audio.ko kernel/sound/core/snd-pcm.ko kernel/sound/core/snd-timer.ko kernel/sound/core/snd.ko kernel/sound/soundcore.ko
+kernel/sound/pci/hda/snd-hda-codec-via.ko: kernel/sound/pci/hda/snd-hda-codec-generic.ko kernel/sound/pci/hda/snd-hda-codec.ko kernel/sound/hda/snd-hda-core.ko kernel/drivers/leds/trigger/ledtrig-audio.ko kernel/sound/core/snd-pcm.ko kernel/sound/core/snd-timer.ko kernel/sound/core/snd.ko kernel/sound/soundcore.ko
+kernel/sound/pci/hda/snd-hda-codec-hdmi.ko: kernel/sound/pci/hda/snd-hda-codec.ko kernel/sound/hda/snd-hda-core.ko kernel/sound/core/snd-pcm.ko kernel/sound/core/snd-timer.ko kernel/sound/core/snd.ko kernel/sound/soundcore.ko
+kernel/sound/pci/hda/snd-hda-intel.ko: kernel/sound/hda/snd-intel-dspcfg.ko kernel/sound/pci/hda/snd-hda-codec.ko kernel/sound/hda/snd-hda-core.ko kernel/sound/core/snd-pcm.ko kernel/sound/core/snd-timer.ko kernel/sound/core/snd.ko kernel/sound/soundcore.ko
+kernel/sound/hda/snd-hda-core.ko: kernel/sound/core/snd-pcm.ko kernel/sound/core/snd-timer.ko kernel/sound/core/snd.ko kernel/sound/soundcore.ko
+kernel/sound/hda/snd-intel-dspcfg.ko:
+kernel/sound/hda/snd-intel-sdw-acpi.ko:
+kernel/net/sched/sch_cbq.ko:
+kernel/net/sched/sch_htb.ko:
+kernel/net/sched/sch_red.ko:
+kernel/net/sched/sch_sfq.ko:
+kernel/net/sched/sch_tbf.ko:
+kernel/net/sched/sch_prio.ko:
+kernel/net/sched/cls_tcindex.ko:
+kernel/net/sched/cls_basic.ko:

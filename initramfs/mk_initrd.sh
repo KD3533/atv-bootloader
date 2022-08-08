@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 #
 # Version 1.2 (May 17, 2008)
 #
@@ -13,7 +13,7 @@
 # equivalent busybox symlinks or they will over-write busybox
 # when copied. This can cause very bad things to happen.
 
-SCRIPT_DIR=$(dirname `readlink -f "$0"`)
+SCRIPT_DIR=$(dirname "`readlink -f "$0"`")
 cd "${SCRIPT_DIR}"
 
 # go into rootfs
@@ -45,8 +45,8 @@ cp -arp ../apps/busybox/build/*	./
 # copy standard apps
 #
 cp -a  /bin/bash			bin/
-#cp -a  /usr/bin/ldd                     usr/bin/
-cp -a  /sbin/ldconfig.real		sbin/ldconfig
+#cp -a  /usr/bin/ldd                    usr/bin/
+cp -a  /sbin/ldconfig			sbin/ldconfig
 #
 cp -a  /sbin/dosfsck			sbin/fsck.msdos
 ln -s  /sbin/fsck.msdos sbin/fsck.vfat
@@ -66,10 +66,10 @@ cp -a  /sbin/fsck                       sbin/
 cp -a  /sbin/fsck.ext2                  sbin/
 cp -a  /sbin/fsck.ext3                  sbin/
 cp -a  /sbin/fsck.ext4                  sbin/
-#ln -s  /sbin/fsck.ext2 sbin/fsck.ext3
-#ln -s  /sbin/fsck.ext2 sbin/fsck.ext4
+# ln -s  /sbin/fsck.ext2 sbin/fsck.ext3
+# ln -s  /sbin/fsck.ext2 sbin/fsck.ext4
 
-cp -a  /sbin/fsck.nfs			sbin/
+# cp -a  /sbin/fsck.nfs			sbin/
 cp -a  /sbin/fsck.xfs			sbin/
 cp -a  /sbin/fsck.reiserfs		sbin/
 cp -a  /sbin/fsck.reiser4		sbin/
@@ -91,17 +91,18 @@ cp -a  /usr/bin/lspci			usr/bin/
 cp -a  /bin/nano                        bin/
 ln -s  /bin/nano bin/pico
 
+echo "here"
 # copy our built apps
 cp -a  `which kexec`		sbin/
-cp -a  `which gptsync`		usr/bin/
+# not needed anymore cp -a  `which gptsync`	usr/bin/
 cp -a  `which parted`		usr/sbin/
 cp -a  `which partprobe`	usr/sbin/
 cp -a  `which gdisk`		usr/sbin/
 cp -a  `which rsync`		usr/sbin/
+echo "here2"
 
 ln -s  sbin/fsck.hfsplus sbin/fsck.hfs
 ln -s  sbin/mkfs.hfsplus sbin/mkfs.hfs
-
 # wireless
 #for BINARY in iwconfig iwlist wpa_supplicant wpa_cli wpa_passphrase wpa_action ; do
 for BINARY in iwconfig iwlist; do
@@ -161,9 +162,12 @@ strip --strip-debug usr/sbin/* >/dev/null 2>&1
 ldconfig -r ./
 
 # kernel modules
-cd "${SCRIPT_DIR}/../linux/linux-2.6.39"* && make INSTALL_MOD_PATH="${SCRIPT_DIR}/rootfs" modules_install && cd "${SCRIPT_DIR}/rootfs/lib/modules/"* && rm build && rm source
+cd "${SCRIPT_DIR}"/../linux/linux-5.15.41*/ 
+make INSTALL_MOD_PATH="${SCRIPT_DIR}"/rootfs modules_install 
+cd "${SCRIPT_DIR}"/rootfs/lib/modules/* 
+# rm build && rm source TODO comment in again
 
-cd "${SCRIPT_DIR}/rootfs"
+cd "${SCRIPT_DIR}"/rootfs
 
 # firmware
 cp -a "${SCRIPT_DIR}/firmware/"* lib/firmware
