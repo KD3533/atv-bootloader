@@ -1,3 +1,5 @@
+Modern version of atv-bootloader based on Alpine Linux 3.17.3
+
 # atv-bootloader
 
 (forked from original code exported from Google Code)
