@@ -291,9 +291,9 @@ void quirk_fixup_efi_memmap(boot_params_t *bp)
 			new_pages = (end - new_bgn) / (1 << EFI_PAGE_SHIFT);
 
 			new_end = new_bgn + (new_pages << EFI_PAGE_SHIFT);
-			printk("ATV:   fixing memory overlap\n");
-			printk("ATV:   memory range=[0x%08X%08X-", hi32(new_bgn), lo32(new_bgn) );
-			printk("ATV:     0x%08X%08X]\n", hi32(new_end), lo32(new_end) );
+			//printk("ATV:   fixing memory overlap\n");
+			//printk("ATV:   memory range=[0x%08X%08X-", hi32(new_bgn), lo32(new_bgn) );
+			//printk("ATV:     0x%08X%08X]\n", hi32(new_end), lo32(new_end) );
 
 			md->phys_addr = new_bgn;
 			md->num_pages = new_pages;
@@ -319,7 +319,7 @@ void quirk_fixup_efi_memmap(boot_params_t *bp)
 			new_pages = (target - new_bgn) / (1 << EFI_PAGE_SHIFT);
 
 			new_end = new_bgn + (new_pages << EFI_PAGE_SHIFT);
-			printk("ATV:   fixing memory target\n");
+			//printk("ATV:   fixing memory target\n");
 
 			md->phys_addr = new_bgn;
 			md->num_pages = new_pages;

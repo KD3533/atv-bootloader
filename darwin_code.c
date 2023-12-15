@@ -27,7 +27,7 @@ getsectbynamefromheader(struct mach_header *mhp, const char *segname, const char
 					//	strncmp(sp->segname,  segname,  sizeof(sp->segname)) == 0) {
 					if (strncmp(sp->sectname, sectname, strlen(sp->sectname)) == 0 &&
 						strncmp(sp->segname,  segname,  strlen(sp->segname)) == 0) {
-							printk("ATV: found - section %s and segment %s\n", sectname, segname);
+							//printk("ATV: found - section %s and segment %s\n", sectname, segname);
 							return(sp);
 					}
 					//
@@ -37,7 +37,7 @@ getsectbynamefromheader(struct mach_header *mhp, const char *segname, const char
 		}
 	    sgp = (struct segment_command *)((char *)sgp + sgp->cmdsize);
 	}
-	printk("ATV: not found - section %s and segment %s\n", sectname, segname);
+	//printk("ATV: not found - section %s and segment %s\n", sectname, segname);
 	//
 	return((struct section *)0);
 }

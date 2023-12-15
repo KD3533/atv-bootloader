@@ -248,12 +248,12 @@ create_boot_params(boot_params_t *bp, char *cmdline)
 	bp->s.efi_mem_desc_ver	= mach_bp->efi_mem_desc_ver;
 	bp->s.efi_sys_tbl		= mach_bp->efi_sys_tbl;
 	
-	printk("ATV: fixup efi memmap\n");
+	//printk("ATV: fixup efi memmap\n");
 	quirk_fixup_efi_memmap(bp);
 	//
 	// Now that we have EFI memory map, convert it to E820 map
 	//	and update the bootparam accordingly
-	printk("ATV: converting EFI memmap -> e820 memmap\n");
+	//printk("ATV: converting EFI memmap -> e820 memmap\n");
 	fill_e820map(bp);
 	//
 	//print_e820_memory_map(bp);
@@ -303,12 +303,12 @@ create_boot_params(boot_params_t *bp, char *cmdline)
 	unsigned long		rsdp_low_mem   = 0xF8000;
 	unsigned long		smbios_low_mem = 0xF8100;
 	//
-	printk("ATV: clone ACPI entry to %lx...\n", rsdp_low_mem);
+	//printk("ATV: clone ACPI entry to %lx...\n", rsdp_low_mem);
 	// We need at copy the RSDP down low so linux can find it
 	// copy RSDP table entry from efi location to low mem location
 	memcpy((void*)rsdp_low_mem, efi.acpi20, sizeof(acpi_rsdp_t) );
 
-	printk("ATV: clone SMBIOS entry to %lx...\n", smbios_low_mem);
+	//printk("ATV: clone SMBIOS entry to %lx...\n", smbios_low_mem);
 	// We need at copy the SMBIOS Table Entry Point down low so linux can find it
 	// copy SMBIOS Table Entry Point from efi location to low mem location
 	memcpy((void*)smbios_low_mem, efi.smbios, sizeof(smbios_entry_t) );
