@@ -77,6 +77,54 @@ load_linux(unsigned int args)
 	//sleep(10);
 	//memset((char*)mach_bp->video.addr, 0x00, vmode.width * vmode.height * 4);
 
+	char* videoptr = (char*)mach_bp->video.addr;
+
+	// Used to move the cricle
+	int xStep = vmode.width / 100;
+	int yStep =	vmode.height / 100;
+
+	// Start position of the circle
+	int startX = vmode.width / 2 + xStep;
+	int startY = vmode.height / 2 + yStep;
+
+	// Initial size and maximum size of the circle
+	int initialRadius = 2;
+	int maxRadius = vmode.width / 2;
+
+	// Number of frames for the animation
+	int numFrames = 20;
+
+	// Frames counter
+	int frame;
+	
+	// Coordinates
+	int y;
+	int x;
+
+	for (frame = 0; frame < numFrames; ++frame) {
+		// Calculate the current radius based on the current frame
+		int currentRadius = initialRadius + (maxRadius - initialRadius) * frame / numFrames;
+
+		for (y = 0; y < vmode.height; ++y) {
+			for (x = 0; x < vmode.width; ++x) {
+				int index = (y * vmode.width + x) * 4;
+
+				// Calculate the distance to the center
+				int distance = (x - startX) * (x - startX) + (y - startY) * (y - startY);
+
+				// Check if the point is inside the circle (distance to the center less than the radius)
+				if (distance < currentRadius * currentRadius) {
+					videoptr[index] = 0;          // Blue
+					videoptr[index + 1] = 0;      // Green
+					videoptr[index + 2] = 255;    // Red
+					videoptr[index + 3] = 255;    // Alpha (opaque)
+				}				
+			}
+		}
+	}
+
+
+
 	VIDEO_CURSOR_POSX = 0;
 	VIDEO_CURSOR_POSY = 0;
 	VIDEO_ATTR = 0xffc8c8c8;
