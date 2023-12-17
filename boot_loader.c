@@ -73,26 +73,24 @@ load_linux(unsigned int args)
 	vmode.width  = mach_bp->video.rowb / 4;
 	vmode.height = mach_bp->video.height;
 	vmode.xmargin = 0;
-	// clear the screen
-	//sleep(10);
-	//memset((char*)mach_bp->video.addr, 0x00, vmode.width * vmode.height * 4);
 
+	// Pointer to the framebuffer memory address
 	char* videoptr = (char*)mach_bp->video.addr;
 
-	// Used to move the cricle
-	int xStep = vmode.width / 100;
-	int yStep =	vmode.height / 100;
+	// Used to translate the cricle
+	float xStep = vmode.width / 100;
+	float yStep =	vmode.height / 100;
 
 	// Start position of the circle
-	int startX = vmode.width / 2 + xStep;
-	int startY = vmode.height / 2 + yStep;
+	int startX = vmode.width / 2 + (4.5 * xStep);
+	int startY = vmode.height / 2 + (4 * yStep);
 
 	// Initial size and maximum size of the circle
-	int initialRadius = 2;
-	int maxRadius = vmode.width / 2;
+	int initialRadius = 10;
+	int maxRadius = vmode.width / 3;
 
 	// Number of frames for the animation
-	int numFrames = 20;
+	int numFrames = 15;
 
 	// Frames counter
 	int frame;
@@ -102,9 +100,9 @@ load_linux(unsigned int args)
 	int x;
 
 	for (frame = 0; frame < numFrames; ++frame) {
+		
 		// Calculate the current radius based on the current frame
 		int currentRadius = initialRadius + (maxRadius - initialRadius) * frame / numFrames;
-
 		for (y = 0; y < vmode.height; ++y) {
 			for (x = 0; x < vmode.width; ++x) {
 				int index = (y * vmode.width + x) * 4;
@@ -114,16 +112,16 @@ load_linux(unsigned int args)
 
 				// Check if the point is inside the circle (distance to the center less than the radius)
 				if (distance < currentRadius * currentRadius) {
-					videoptr[index] = 0;          // Blue
-					videoptr[index + 1] = 0;      // Green
-					videoptr[index + 2] = 255;    // Red
+					videoptr[index] = 147;        // Blue
+					videoptr[index + 1] = 147;    // Green
+					videoptr[index + 2] = 147;    // Red
 					videoptr[index + 3] = 255;    // Alpha (opaque)
 				}				
 			}
 		}
 	}
 
-
+	memset((char*)mach_bp->video.addr, 0x88, vmode.width * vmode.height * 4);
 
 	VIDEO_CURSOR_POSX = 0;
 	VIDEO_CURSOR_POSY = 0;
