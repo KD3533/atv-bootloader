@@ -1,6 +1,6 @@
 .PHONY: inject_kernel
 # handy tools to remember under darwin tools
-# otool -l mach_kernel 
+# otool -l mach_kernel
 # size -m mach_kernel
 #
 #
@@ -24,8 +24,11 @@ OBJ	= start.o vsprintf.o console.o utils.o elilo_code.o darwin_code.o linux_code
 
 KERN_OBJ:= vmlinuz.obj initrd.obj
 
-mach_kernel: $(KERN_OBJ) $(OBJ)
-	$(LD) $(LDFLAGS) -arch $(ARCH) -o mach_kernel $(OBJ) $(KERN_OBJ) \
+# Save the kernel in /boot
+KERN_OUT = boot/mach_kernel
+
+$(KERN_OUT): $(KERN_OBJ) $(OBJ)
+	$(LD) $(LDFLAGS) -arch $(ARCH) -o $(KERN_OUT) $(OBJ) $(KERN_OBJ) \
 	-static \
 	-force_cpusubtype_ALL \
 	-e __start \
@@ -51,6 +54,4 @@ initrd.obj: initrd.gz
 	$(LD) $(LDFLAGS) -arch $(ARCH) -w -r -o initrd.obj -sectcreate __TEXT __initrd initrd.gz
 
 clean:
-	rm -f *.o $(KERN_OBJ) mach_kernel
-
-#xxd mach_kernel | sed -e "s/ffff ffff 1000/0100 0000 1000/" | xxd -r - mach_kernel
+	rm -f *.o $(KERN_OBJ) $(KERN_OUT)
