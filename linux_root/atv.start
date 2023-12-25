@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# Ermittle die Gerätebezeichnung der Partition
+device=$(df "$PWD" | awk 'NR==2 {print $1}' | sed -E 's/([0-9]+)$//;s|/dev/||')
+
+# Setze die gewünschte Zahl am Ende
+part_number=1
+
+echo "$device"
+
+# Füge die neue Zahl am Ende des Gerätenamens hinzu
+target_disk="/dev/${device}${part_number}"
+
+echo "$target_disk"
+
+mount_point="/mnt"
+
+mount -t hfsplus -o ro "$target_disk" "$mount_point"
+
+# Konstruiere den Pfad zur ersten Partition auf der Ziel-Festplatte
+file_path="/mnt/bootloader.sh"
+
+# Überprüfe, ob das Skript auf der gefundenen Partition existiert
+if [ -e "$file_path" ]; then
+    # Führe das Skript auf Partition eins aus
+    echo "Führe das Skript auf Partition eins aus..."
+    bash "$file_path"
+else
+    echo "Skript auf Partition eins nicht gefunden."
+fi
+
