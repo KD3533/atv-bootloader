@@ -9,7 +9,7 @@
         <key>Boot Logo</key>
         <string>BootLogo.png</string>
         <key>Kernel Flags</key>
-        <string>BOOTFLAGS</string>
+        <string>video=vesafb root=LABEL=root modules=sd-mod,sr-mod,isofs,usb-storage,ext4 quiet rootfstype=ext4</string>
         <key>Kernel</key>
         <string>mach_kernel</string>
 </dict>
