@@ -10,8 +10,28 @@ kexec --load vmlinuz --initrd=initrd.gz --command-line="root=/dev/sdb2 video=ves
 kexec -e
 ```
 
-
 ## How To Use
+After following the installation instructions below and booting your Apple TV for the first time, you will be greeted by this image.
+As mentioned above, kexec needs a kernel, initrd and command line parameters. This menu allows you to select them. If you want to go back to the alpine commandline, you can exit the boot loader here with **Exit to CMD**.
+![Screenshot of the kernel selection screen](screenshots/Screenshot_Kernel.png)
+
+The boot loader lists all the Linux kernels it found (and files matching the same criteria) for you to choose from.  
+
+![Screenshot of the initrd selection screen](screenshots/Screenshot_Initrd.png)
+Here you have to select your initrd just like you did for the kernel in the previous step.
+
+Now you just have to specify a kernel command line.
+![Screenshot of the initrd selection screen](screenshots/Screenshot_Commandline.png)
+You have the following options:  
+* Reset the commandline alpine is booted from (more on this in the next chapter)
+* Set the commandline parameter to the root of a Linux file system. This will be the same partition you selected the kernel from.
+* Try using the casper boot parameters used in old versions of Ubuntu and Debian.
+* Type the command line manually
+* Skip / leave blank
+
+Now your Linux should boot :)
+
+## How To Install / Build
 
 ### Use one of my prebuild images from the `releases` tab.  
 On Windows use e.g. etcher to image the file over to a USB stick.  
